@@ -24,7 +24,7 @@ SECRET_KEY = '94c==086w-7y!3y@%o(ls)8cfw%6-rhen%^@00t7e134j_46!+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'https://polydroid-api.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'polydroid-api.herokuapp.com']
 
 # Application definition
 
