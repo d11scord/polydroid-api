@@ -2,13 +2,27 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Groups
-from .serializers import GroupSerializer
+from .serializers import *
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all().order_by('name')
+    queryset = Groups.objects.all()
     serializer_class = GroupSerializer
+
+
+class LessonViewSet(viewsets.ModelViewSet):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class TeacherViewSet(viewsets.ModelViewSet):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+
+
+class AuditoryViewSet(viewsets.ModelViewSet):
+    queryset = Auditory.objects.all()
+    serializer_class = AuditorySerializer
 
 
 class JSONGroupsView(APIView):

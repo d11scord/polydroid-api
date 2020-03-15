@@ -21,13 +21,14 @@ from django.urls import path, include
 from schedule.views import *
 
 router = routers.DefaultRouter()
-router.register(r'groups_api', GroupViewSet)
+router.register(r'groups-list', GroupViewSet)
+router.register(r'lessons-list', LessonViewSet)
+router.register(r'teachers-list', TeacherViewSet)
+router.register(r'classrooms-list', AuditoryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-
-    url(r'^groups_json/$', JSONGroupsView.as_view()),
-
+    url(r'^groups/$', JSONGroupsView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
