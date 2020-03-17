@@ -6,7 +6,7 @@ class Groups(models.Model):
     course = models.SmallIntegerField()
     date_from = models.DateField()
     date_to = models.DateField()
-    evening = models.SmallIntegerField()
+    evening = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -17,7 +17,7 @@ class Groups(models.Model):
 
 
 class Teacher(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
@@ -37,9 +37,17 @@ class Auditory(models.Model):
 class Lesson(models.Model):
     lab_work = 'Laboratory work'
     lecture = 'Lecture'
+    practice = 'Practice'
+    exam = 'Exam'
+    credit = 'Credit'
+    other = 'Other'
     TYPES = (
         (lab_work, 'Laboratory work'),
         (lecture, 'Lecture'),
+        (practice, 'Practice'),
+        (exam, 'Exam'),
+        (credit, 'Credit'),
+        (other, 'Other'),
     )
 
     first_module = 'first_module'
@@ -54,11 +62,12 @@ class Lesson(models.Model):
     )
 
     name = models.CharField(max_length=50)
-    group_title = models.ForeignKey(Groups, on_delete=models.CASCADE)
+    group = models.ForeignKey(Groups, on_delete=models.CASCADE)
+    teachers = models.ManyToManyField(Teacher)
     type = models.CharField(max_length=20, choices=TYPES, null=False, blank=False)
     date_from = models.DateField()
     date_to = models.DateField()
     module = models.CharField(max_length=15, choices=MODULES, null=False, blank=False)
 
     def __str__(self):
-        return '{} {}'.format(self.name, self.group_title)
+        return '{} {}'.format(self.name, self.group)

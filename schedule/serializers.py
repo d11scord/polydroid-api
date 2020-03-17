@@ -3,25 +3,29 @@ from rest_framework import serializers
 from .models import *
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ('title', 'course', 'date_from', 'date_to', 'evening')
+        fields = ('id', 'title')
 
 
-class LessonSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Lesson
-        fields = ('name', 'group_title', 'type', 'date_from', 'date_to', 'module')
-
-
-class TeacherSerializer(serializers.HyperlinkedModelSerializer):
+class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ('name', )
+        fields = ('id', 'name', )
 
 
-class AuditorySerializer(serializers.HyperlinkedModelSerializer):
+class AuditorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Auditory
-        fields = ('name', 'color')
+        fields = ('id', 'name', 'color')
+
+
+class LessonSerializer(serializers.ModelSerializer):
+    group = GroupSerializer()
+    teachers = TeacherSerializer(many=True)
+
+    class Meta:
+        model = Lesson
+        fields = ('id', 'name', 'group', 'teachers', 'type', 'date_from', 'date_to', 'module')
+

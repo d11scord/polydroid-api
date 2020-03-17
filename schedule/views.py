@@ -5,14 +5,14 @@ from rest_framework.views import APIView
 from .serializers import *
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all()
-    serializer_class = GroupSerializer
-
-
 class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Groups.objects.all()
+    serializer_class = GroupSerializer
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
@@ -23,6 +23,19 @@ class TeacherViewSet(viewsets.ModelViewSet):
 class AuditoryViewSet(viewsets.ModelViewSet):
     queryset = Auditory.objects.all()
     serializer_class = AuditorySerializer
+
+
+# class SearchViewSet(APIView):
+#     def get(self, request):
+#         groups_queryset = Groups.objects.all()
+#         teachers_queryset = Teacher.objects.all()
+#         classroms_queryset = Auditory.objects.all()
+#         response = {
+#             'groups': groups_queryset.data,
+#             'teachers': teachers_queryset.data,
+#             'classrooms': classroms_queryset.data,
+#         }
+#         return Response(response)
 
 
 class JSONGroupsView(APIView):
