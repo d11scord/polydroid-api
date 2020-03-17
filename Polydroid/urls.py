@@ -25,11 +25,12 @@ router.register(r'groups-list', GroupViewSet)
 router.register(r'lessons-list', LessonViewSet)
 router.register(r'teachers-list', TeacherViewSet)
 router.register(r'classrooms-list', AuditoryViewSet)
+# router.register(r'search', SearchViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     url(r'^groups/$', JSONGroupsView.as_view()),
-    # url(r'^search/$', SearchViewSet.as_view()),
+    url(r'^search/$', SearchViewSet.as_view({'get': 'list'})),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

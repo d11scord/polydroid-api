@@ -21,6 +21,12 @@ class AuditorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'color')
 
 
+class SearchSerializer(serializers.Serializer):
+    groups = GroupSerializer(many=True)
+    teachers = TeacherSerializer(many=True)
+    classrooms = AuditorySerializer(many=True)
+
+
 class LessonSerializer(serializers.ModelSerializer):
     group = GroupSerializer()
     teachers = TeacherSerializer(many=True)

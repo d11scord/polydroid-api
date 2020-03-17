@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core import serializers
 
 from .serializers import *
 
@@ -30,12 +31,28 @@ class AuditoryViewSet(viewsets.ModelViewSet):
 #         groups_queryset = Groups.objects.all()
 #         teachers_queryset = Teacher.objects.all()
 #         classroms_queryset = Auditory.objects.all()
-#         response = {
-#             'groups': groups_queryset.data,
-#             'teachers': teachers_queryset.data,
-#             'classrooms': classroms_queryset.data,
-#         }
+#         all_objects = list(groups_queryset) + list(teachers_queryset) + list(classroms_queryset)
+#         response = serializers.serialize('json', all_objects)
 #         return Response(response)
+
+
+from collections import namedtuple
+
+Search = namedtuple('Search', ('groups', 'teachers', 'classrooms'))
+
+
+class SearchViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing the Tweets and Articles in your Timeline.
+    """
+    def list(self, request):
+        search = Search(
+            groups=Groups.objects.all(),
+            teachers=Teacher.objects.all(),
+            classrooms=Auditory.objects.all(),
+        )
+        serializer = SearchSerializer(search)
+        return Response(serializer.data)
 
 
 class JSONGroupsView(APIView):
