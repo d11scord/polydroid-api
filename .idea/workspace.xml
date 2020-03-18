@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Polydroid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -151,7 +152,8 @@
       <workItem from="1584014867131" duration="2317000" />
       <workItem from="1584272736020" duration="4877000" />
       <workItem from="1584281374937" duration="16106000" />
-      <workItem from="1584459732964" duration="7408000" />
+      <workItem from="1584459732964" duration="7723000" />
+      <workItem from="1584521352301" duration="5208000" />
     </task>
     <servers />
   </component>

@@ -6,7 +6,7 @@ from .models import *
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ('id', 'title')
+        fields = ('id', 'title', 'evening')
 
 
 class TeacherSerializer(serializers.ModelSerializer):

@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core import serializers
@@ -11,9 +12,24 @@ class LessonViewSet(viewsets.ModelViewSet):
     serializer_class = LessonSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all()
-    serializer_class = GroupSerializer
+# class GroupViewSet(APIView):
+#     def get(self, request):
+#         groups = Groups.objects.all()
+#         serializer = GroupSerializer(groups, many=True)
+#         return Response({"groups": serializer.data})
+
+
+class GroupViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Groups.objects.all()
+        serializer = GroupSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Groups.objects.all()
+        group = get_object_or_404(queryset, pk=pk)
+        serializer = GroupSerializer(group)
+        return Response(serializer.data)
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
@@ -43,7 +59,7 @@ Search = namedtuple('Search', ('groups', 'teachers', 'classrooms'))
 
 class SearchViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing the Tweets and Articles in your Timeline.
+    Search for groups, teachers and classrooms.
     """
     def list(self, request):
         search = Search(
