@@ -7,9 +7,17 @@ from django.core import serializers
 from .serializers import *
 
 
-class LessonViewSet(viewsets.ModelViewSet):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+class LessonViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Lesson.objects.all()
+        serializer = LessonSerializer(queryset, many=True)
+        return Response({'lessons': serializer.data})
+
+    def retrieve(self, request, pk=None):
+        queryset = Lesson.objects.filter(group__title=pk)
+        # lesson = get_object_or_404(queryset, pk=pk)
+        serializer = LessonSerializer(queryset, many=True)
+        return Response({'response': serializer.data})
 
 
 # class GroupViewSet(APIView):
@@ -23,7 +31,7 @@ class GroupViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Groups.objects.all()
         serializer = GroupSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response({'groups': serializer.data})
 
     def retrieve(self, request, pk=None):
         queryset = Groups.objects.all()

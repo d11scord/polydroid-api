@@ -30,8 +30,9 @@ class SearchSerializer(serializers.Serializer):
 class LessonSerializer(serializers.ModelSerializer):
     group = GroupSerializer()
     teachers = TeacherSerializer(many=True)
+    classrooms = AuditorySerializer(many=True)
 
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'group', 'teachers', 'type', 'date_from', 'date_to', 'module')
+        fields = ('id', 'name', 'group', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
 

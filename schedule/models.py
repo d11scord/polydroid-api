@@ -60,8 +60,8 @@ class Lesson(models.Model):
         (no_module, 'no_module'),
         (none, 'none'),
     )
-
-    name = models.CharField(max_length=50)
+    classrooms = models.ManyToManyField(Auditory, blank=True, null=True)
+    name = models.CharField(max_length=100)
     group = models.ForeignKey(Groups, on_delete=models.CASCADE)
     teachers = models.ManyToManyField(Teacher)
     type = models.CharField(max_length=20, choices=TYPES, null=False, blank=False)
