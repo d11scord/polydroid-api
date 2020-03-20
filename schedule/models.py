@@ -60,6 +60,26 @@ class Lesson(models.Model):
         (no_module, 'no_module'),
         (none, 'none'),
     )
+
+    monday = 'monday'
+    tuesday = 'tuesday'
+    wednesday = 'wednesday'
+    thursday = 'thursday'
+    friday = 'friday'
+    saturday = 'saturday'
+    sunday = 'sunday'
+
+    DAYS_OF_WEEK = (
+        (monday, 'monday'),
+        (tuesday, 'tuesday'),
+        (wednesday, 'wednesday'),
+        (thursday, 'thursday'),
+        (friday, 'friday'),
+        (saturday, 'saturday'),
+        (sunday, 'sunday'),
+    )
+    day = models.CharField(max_length=20, choices=DAYS_OF_WEEK, default=monday)
+    lesson_idx = models.IntegerField(null=True)
     classrooms = models.ManyToManyField(Auditory, blank=True, null=True)
     name = models.CharField(max_length=100)
     group = models.ForeignKey(Groups, on_delete=models.CASCADE)

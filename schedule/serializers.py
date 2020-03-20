@@ -28,11 +28,28 @@ class SearchSerializer(serializers.Serializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    group = GroupSerializer()
+    # group = GroupSerializer()
+    teachers = TeacherSerializer(many=True)
+    classrooms = AuditorySerializer(many=True)
+    # day = serializers.SerializerMethodField('get_temp')
+    #
+    # def get_temp(self, obj):
+    #     return {obj.day: [obj.name, obj.group]}
+
+    class Meta:
+        model = Lesson
+        fields = ('name', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
+
+
+class GroupLessonSerializer(serializers.ModelSerializer):
     teachers = TeacherSerializer(many=True)
     classrooms = AuditorySerializer(many=True)
 
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'group', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
+        fields = ('id', 'name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
 
+    def to_representation(self, instance):
+        # temp = super().to_representation(instance)
+
+        return instance
