@@ -24,14 +24,11 @@ class Teacher(models.Model):
 
 
 class Classroom(models.Model):
-    name = models.CharField(max_length=15, unique=True)
+    name = models.CharField(max_length=150, unique=True)
     color = models.CharField(max_length=8)
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name_plural = 'Auditories'
 
 
 class LessonType(models.Model):
