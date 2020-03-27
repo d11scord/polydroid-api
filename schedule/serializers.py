@@ -6,31 +6,31 @@ from .models import *
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ('id', 'title', 'evening')
+        fields = ('id', 'name', 'is_evening')
 
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ('id', 'name', )
+        fields = ('id', 'name')
 
 
-class AuditorySerializer(serializers.ModelSerializer):
+class ClassroomSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Auditory
+        model = Classroom
         fields = ('id', 'name', 'color')
 
 
 class SearchSerializer(serializers.Serializer):
     groups = GroupSerializer(many=True)
     teachers = TeacherSerializer(many=True)
-    classrooms = AuditorySerializer(many=True)
+    classrooms = ClassroomSerializer(many=True)
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    # group = GroupSerializer()
-    teachers = TeacherSerializer(many=True)
-    classrooms = AuditorySerializer(many=True)
+    group = GroupSerializer(many=False, read_only=True)
+    teachers = TeacherSerializer(many=True, read_only=True)
+    classrooms = ClassroomSerializer(many=True, read_only=True)
     # day = serializers.SerializerMethodField('get_temp')
     #
     # def get_temp(self, obj):
@@ -38,16 +38,22 @@ class LessonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ('name', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
+        fields = ('name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to')
+
+
+class LessonTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonType
+        fields = ('id', 'name')
 
 
 class GroupLessonSerializer(serializers.ModelSerializer):
     teachers = TeacherSerializer(many=True)
-    classrooms = AuditorySerializer(many=True)
+    classrooms = ClassroomSerializer(many=True)
 
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to', 'module')
+        fields = ('id', 'name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to')
 
     def to_representation(self, instance):
         # temp = super().to_representation(instance)

@@ -2,14 +2,14 @@ from django.db import models
 
 
 class Groups(models.Model):
-    title = models.CharField(max_length=10)
-    course = models.SmallIntegerField()
-    date_from = models.DateField()
-    date_to = models.DateField()
-    evening = models.BooleanField(default=False)
+    name = models.CharField(max_length=20, unique=True)
+    course = models.SmallIntegerField(null=True, blank=True)
+    date_from = models.DateField(null=True, blank=True)
+    date_to = models.DateField(null=True, blank=True)
+    is_evening = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return '{} {}'.format(self.id, self.name)
 
     class Meta:
         verbose_name_plural = 'Group'
@@ -23,9 +23,9 @@ class Teacher(models.Model):
         return self.name
 
 
-class Auditory(models.Model):
-    name = models.CharField(max_length=10)
-    color = models.CharField(max_length=10)
+class Classroom(models.Model):
+    name = models.CharField(max_length=10, unique=True)
+    color = models.CharField(max_length=8)
 
     def __str__(self):
         return self.name
@@ -34,60 +34,44 @@ class Auditory(models.Model):
         verbose_name_plural = 'Auditories'
 
 
+class LessonType(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return str('{}: {}'.format(self.id, self.name))
+
+
 class Lesson(models.Model):
-    lab_work = 'Laboratory work'
-    lecture = 'Lecture'
-    practice = 'Practice'
-    exam = 'Exam'
-    credit = 'Credit'
-    other = 'Other'
-    TYPES = (
-        (lab_work, 'Laboratory work'),
-        (lecture, 'Lecture'),
-        (practice, 'Practice'),
-        (exam, 'Exam'),
-        (credit, 'Credit'),
-        (other, 'Other'),
+    LESSON_WEEK = (
+        (1, 'even'),
+        (2, 'odd'),
+        (3, 'both')
     )
-
-    first_module = 'first_module'
-    second_module = 'second_module'
-    no_module = 'no_module'
-    none = 'none'
-    MODULES = (
-        (first_module, 'first_module'),
-        (second_module, 'second_module'),
-        (no_module, 'no_module'),
-        (none, 'none'),
-    )
-
-    monday = 'monday'
-    tuesday = 'tuesday'
-    wednesday = 'wednesday'
-    thursday = 'thursday'
-    friday = 'friday'
-    saturday = 'saturday'
-    sunday = 'sunday'
-
     DAYS_OF_WEEK = (
-        (monday, 'monday'),
-        (tuesday, 'tuesday'),
-        (wednesday, 'wednesday'),
-        (thursday, 'thursday'),
-        (friday, 'friday'),
-        (saturday, 'saturday'),
-        (sunday, 'sunday'),
+        (1, 'monday'),
+        (2, 'tuesday'),
+        (3, 'wednesday'),
+        (4, 'thursday'),
+        (5, 'friday'),
+        (6, 'saturday'),
+        (7, 'sunday'),
     )
-    day = models.CharField(max_length=20, choices=DAYS_OF_WEEK, default=monday)
-    lesson_idx = models.IntegerField(null=True)
-    classrooms = models.ManyToManyField(Auditory, blank=True, null=True)
     name = models.CharField(max_length=100)
+    day_of_week = models.IntegerField(choices=DAYS_OF_WEEK)
+    number = models.IntegerField()
     group = models.ForeignKey(Groups, on_delete=models.CASCADE)
+    classrooms = models.ManyToManyField(Classroom)
     teachers = models.ManyToManyField(Teacher)
-    type = models.CharField(max_length=20, choices=TYPES, null=False, blank=False)
+    type = models.ForeignKey(LessonType, on_delete=models.CASCADE)
     date_from = models.DateField()
     date_to = models.DateField()
-    module = models.CharField(max_length=15, choices=MODULES, null=False, blank=False)
+    week = models.IntegerField(choices=LESSON_WEEK)
 
     def __str__(self):
         return '{} {}'.format(self.name, self.group)
+
+
+class Notification(models.Model):
+    time = models.DateTimeField()
+    old_lesson = models.TextField()
+    new_lesson = models.TextField()

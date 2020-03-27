@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polydroid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0002_auto_20200317_2017.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0003_lesson_classrooms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0004_auto_20200320_1852.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +48,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TPISlabs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -43,6 +57,8 @@
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\utils" />
+      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid" />
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\schedule" />
     </key>
   </component>
@@ -58,7 +74,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.urls">
+  <component name="RunManager" selected="Python.parser (1)">
+    <configuration name="parser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Polydroid" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/schedule_parser" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/schedule_parser/parser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Polydroid" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,6 +166,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.parser (1)" />
         <item itemvalue="Python.urls" />
         <item itemvalue="Python.parser" />
       </list>
@@ -154,6 +193,9 @@
       <workItem from="1584642524677" duration="535000" />
       <workItem from="1584691391381" duration="27000" />
       <workItem from="1584716441799" duration="14068000" />
+      <workItem from="1584871520910" duration="167000" />
+      <workItem from="1585302191657" duration="2747000" />
+      <workItem from="1585305410052" duration="6335000" />
     </task>
     <servers />
   </component>
@@ -176,5 +218,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Polydroid$parser.coverage" NAME="parser Coverage Results" MODIFIED="1584017157817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/quickstart" />
     <SUITE FILE_PATH="coverage/Polydroid$urls.coverage" NAME="urls Coverage Results" MODIFIED="1584279318156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Polydroid" />
+    <SUITE FILE_PATH="coverage/Polydroid$parser__1_.coverage" NAME="parser (1) Coverage Results" MODIFIED="1585305914501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/schedule_parser" />
   </component>
 </project>

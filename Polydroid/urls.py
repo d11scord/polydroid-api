@@ -23,8 +23,8 @@ from schedule.views import *
 router = routers.DefaultRouter()
 router.register(r'groups', GroupViewSet, basename='groups')
 router.register(r'lessons', LessonViewSet, basename='lessons')
-router.register(r'teachers-list', TeacherViewSet)
-router.register(r'classrooms-list', AuditoryViewSet)
+router.register(r'teachers', TeacherViewSet)
+router.register(r'classrooms', ClassroomViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

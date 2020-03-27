@@ -7,6 +7,7 @@ from django.core import serializers
 from .serializers import *
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -15,20 +16,20 @@ class LessonViewSet(viewsets.ViewSet):
         result = {'monday': list(), 'tuesday': list(), 'wednesday': list(), 'thursday': list(),
                   'friday': list(), 'saturday': list(), 'sunday': list()}
         for i in data:
-            logger.error(i.day)
-            if i.day == 'monday':
+            logger.error(i.day_of_week)
+            if i.day_of_week == 1:
                 result['monday'].append(LessonSerializer(i).data)
-            if i.day == 'tuesday':
+            if i.day_of_week == 2:
                 result['tuesday'].append(LessonSerializer(i).data)
-            if i.day == 'wednesday':
+            if i.day_of_week == 3:
                 result['wednesday'].append(LessonSerializer(i).data)
-            if i.day == 'thursday':
+            if i.day_of_week == 4:
                 result['thursday'].append(LessonSerializer(i).data)
-            if i.day == 'friday':
+            if i.day_of_week == 5:
                 result['friday'].append(LessonSerializer(i).data)
-            if i.day == 'saturday':
+            if i.day_of_week == 6:
                 result['saturday'].append(LessonSerializer(i).data)
-            if i.day == 'sunday':
+            if i.day_of_week == 7:
                 result['sunday'].append(LessonSerializer(i).data)
         return result
 
@@ -38,7 +39,7 @@ class LessonViewSet(viewsets.ViewSet):
         return Response({'lessons': serializer.data})
 
     def retrieve(self, request, pk=None):
-        queryset = Lesson.objects.filter(group__title=pk)
+        queryset = Lesson.objects.filter(group__name=pk)
         # lesson = get_object_or_404(queryset, pk=pk)
         serializer = GroupLessonSerializer(queryset, many=True)
 
@@ -72,19 +73,14 @@ class TeacherViewSet(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
 
 
-class AuditoryViewSet(viewsets.ModelViewSet):
-    queryset = Auditory.objects.all()
-    serializer_class = AuditorySerializer
+class ClassroomViewSet(viewsets.ModelViewSet):
+    queryset = Classroom.objects.all()
+    serializer_class = ClassroomSerializer
 
 
-# class SearchViewSet(APIView):
-#     def get(self, request):
-#         groups_queryset = Groups.objects.all()
-#         teachers_queryset = Teacher.objects.all()
-#         classroms_queryset = Auditory.objects.all()
-#         all_objects = list(groups_queryset) + list(teachers_queryset) + list(classroms_queryset)
-#         response = serializers.serialize('json', all_objects)
-#         return Response(response)
+class ClassroomViewSet(viewsets.ModelViewSet):
+    queryset = Classroom.objects.all()
+    serializer_class = ClassroomSerializer
 
 
 from collections import namedtuple
@@ -96,11 +92,12 @@ class SearchViewSet(viewsets.ViewSet):
     """
     Search for groups, teachers and classrooms.
     """
+
     def list(self, request):
         search = Search(
             groups=Groups.objects.all(),
             teachers=Teacher.objects.all(),
-            classrooms=Auditory.objects.all(),
+            classrooms=Classroom.objects.all(),
         )
         serializer = SearchSerializer(search)
         return Response(serializer.data)
