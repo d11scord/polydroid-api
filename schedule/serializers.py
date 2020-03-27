@@ -31,14 +31,10 @@ class LessonSerializer(serializers.ModelSerializer):
     group = GroupSerializer(many=False, read_only=True)
     teachers = TeacherSerializer(many=True, read_only=True)
     classrooms = ClassroomSerializer(many=True, read_only=True)
-    # day = serializers.SerializerMethodField('get_temp')
-    #
-    # def get_temp(self, obj):
-    #     return {obj.day: [obj.name, obj.group]}
 
     class Meta:
         model = Lesson
-        fields = ('name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to')
+        fields = ('name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'week')
 
 
 class LessonTypeSerializer(serializers.ModelSerializer):
@@ -56,6 +52,9 @@ class GroupLessonSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to')
 
     def to_representation(self, instance):
-        # temp = super().to_representation(instance)
-
+        """
+        Оверрайдим метод для того, чтобы возвращать данные в более удобном
+        для парсинга виде (dict вместо OrderedDict).
+        :return: dict(instance)
+        """
         return instance

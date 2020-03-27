@@ -1,12 +1,11 @@
+import logging
+
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.core import serializers
-
 from .serializers import *
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +15,7 @@ class LessonViewSet(viewsets.ViewSet):
         result = {'monday': list(), 'tuesday': list(), 'wednesday': list(), 'thursday': list(),
                   'friday': list(), 'saturday': list(), 'sunday': list()}
         for i in data:
-            logger.error(i.day_of_week)
+            # logger.error(i.day_of_week)
             if i.day_of_week == 1:
                 result['monday'].append(LessonSerializer(i).data)
             if i.day_of_week == 2:
@@ -38,19 +37,20 @@ class LessonViewSet(viewsets.ViewSet):
         serializer = LessonSerializer(queryset, many=True)
         return Response({'lessons': serializer.data})
 
-    def retrieve(self, request, pk=None):
-        queryset = Lesson.objects.filter(group__name=pk)
+    @action(detail=True)
+    def retrieve_lesson(self, request, pk=None):
+        queryset = Lesson.objects.all()
+        lesson = get_object_or_404(queryset, pk=pk)
+        serializer = LessonSerializer(lesson)
+
+        return Response(serializer.data)
+
+    def retrieve_group(self, request, pk=None):
+        queryset = Lesson.objects.filter(group__id=pk)
         # lesson = get_object_or_404(queryset, pk=pk)
         serializer = GroupLessonSerializer(queryset, many=True)
 
         return Response(self.transform_result(serializer.data))
-
-
-# class GroupViewSet(APIView):
-#     def get(self, request):
-#         groups = Groups.objects.all()
-#         serializer = GroupSerializer(groups, many=True)
-#         return Response({"groups": serializer.data})
 
 
 class GroupViewSet(viewsets.ViewSet):
@@ -71,11 +71,6 @@ class GroupViewSet(viewsets.ViewSet):
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
-
-
-class ClassroomViewSet(viewsets.ModelViewSet):
-    queryset = Classroom.objects.all()
-    serializer_class = ClassroomSerializer
 
 
 class ClassroomViewSet(viewsets.ModelViewSet):
@@ -105,7 +100,8 @@ class SearchViewSet(viewsets.ViewSet):
 
 class JSONGroupsView(APIView):
     def get(self, request):
-        import urllib.request, json
+        import urllib.request
+        import json
 
         with urllib.request.urlopen("https://rasp.dmami.ru/groups-list.json") as url:
             response = json.loads(url.read().decode())
