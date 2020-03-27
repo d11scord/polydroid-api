@@ -24,7 +24,7 @@ class Teacher(models.Model):
 
 
 class Classroom(models.Model):
-    name = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=15, unique=True)
     color = models.CharField(max_length=8)
 
     def __str__(self):
