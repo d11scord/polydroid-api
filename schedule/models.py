@@ -53,7 +53,7 @@ class Lesson(models.Model):
         (6, 'saturday'),
         (7, 'sunday'),
     )
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     day_of_week = models.IntegerField(choices=DAYS_OF_WEEK)
     number = models.IntegerField()
     group = models.ForeignKey(Groups, on_delete=models.CASCADE)
