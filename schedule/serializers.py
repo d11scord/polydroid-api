@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 
 from .models import *
@@ -27,29 +29,45 @@ class SearchSerializer(serializers.Serializer):
     classrooms = ClassroomSerializer(many=True)
 
 
+class TimestampField(serializers.Field):
+    def to_representation(self, value):
+        epoch = datetime.date(1970, 1, 1)
+        return int((value - epoch).total_seconds())
+
+
+class LessonTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonType
+        fields = ('name', )
+
+
 class LessonSerializer(serializers.ModelSerializer):
+    # UNIX timestamp для сравнения и сортировки дат
+    date_from = TimestampField()
+    date_to = TimestampField()
+    # Django Model.get_FOO_display
+    week = serializers.CharField(source='get_week_display')
+    # Получаем по внешнему ключу название типа пары с помощью метода
+    type = serializers.SerializerMethodField(source='get_type')
     group = GroupSerializer(many=False, read_only=True)
     teachers = TeacherSerializer(many=True, read_only=True)
     classrooms = ClassroomSerializer(many=True, read_only=True)
 
     class Meta:
         model = Lesson
-        fields = ('name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'week')
+        fields = ('id', 'name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'week')
+
+    def get_type(self, obj):
+        return obj.type.name
 
 
-class LessonTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LessonType
-        fields = ('id', 'name')
-
-
-class GroupLessonSerializer(serializers.ModelSerializer):
-    teachers = TeacherSerializer(many=True)
-    classrooms = ClassroomSerializer(many=True)
-
-    class Meta:
-        model = Lesson
-        fields = ('id', 'name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to')
+class ScheduleGroupSerializer(serializers.ModelSerializer):
+    # teachers = TeacherSerializer(many=True)
+    # classrooms = ClassroomSerializer(many=True)
+    #
+    # class Meta:
+    #     model = Lesson
+    #     fields = ('name', 'day', 'teachers', 'classrooms', 'type', 'date_from', 'date_to')
 
     def to_representation(self, instance):
         """

@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 import logging
 
 from rest_framework import viewsets
@@ -10,57 +12,95 @@ from .serializers import *
 logger = logging.getLogger(__name__)
 
 
-class LessonViewSet(viewsets.ViewSet):
+class ScheduleGroup(viewsets.ViewSet):
     def transform_result(self, data):
-        result = {'monday': list(), 'tuesday': list(), 'wednesday': list(), 'thursday': list(),
-                  'friday': list(), 'saturday': list(), 'sunday': list()}
+        """
+        Метод для трансформации данных расписания одной группы.
+        Распределяет данные по дням недели, а в них по номеру пары.
+        :param data: Данные для трансформации.
+        :return: трансформированный для отображения dict.
+        """
+        # Делаем заготовку по дням недели и количеству пар,
+        # чтобы повторить структуру оригинальный JSON.
+        result = {
+            'monday'   : dict({i: list() for i in range(1, 8)}),
+            'tuesday'  : dict({i: list() for i in range(1, 8)}),
+            'wednesday': dict({i: list() for i in range(1, 8)}),
+            'thursday' : dict({i: list() for i in range(1, 8)}),
+            'friday'   : dict({i: list() for i in range(1, 8)}),
+            'saturday' : dict({i: list() for i in range(1, 8)}),
+            'sunday'   : dict({i: list() for i in range(1, 8)}),
+        }
         for i in data:
-            # logger.error(i.day_of_week)
+            # logger.error(i.number)
             if i.day_of_week == 1:
-                result['monday'].append(LessonSerializer(i).data)
+                result['monday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 2:
-                result['tuesday'].append(LessonSerializer(i).data)
+                result['tuesday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 3:
-                result['wednesday'].append(LessonSerializer(i).data)
+                result['wednesday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 4:
-                result['thursday'].append(LessonSerializer(i).data)
+                result['thursday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 5:
-                result['friday'].append(LessonSerializer(i).data)
+                result['friday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 6:
-                result['saturday'].append(LessonSerializer(i).data)
+                result['saturday'][i.number].append(LessonSerializer(i).data)
             if i.day_of_week == 7:
-                result['sunday'].append(LessonSerializer(i).data)
+                result['sunday'][i.number].append(LessonSerializer(i).data)
         return result
 
     def list(self, request):
+        """
+        Получаем список всех пар.
+        """
         queryset = Lesson.objects.all()
         serializer = LessonSerializer(queryset, many=True)
         return Response({'lessons': serializer.data})
 
     @action(detail=True)
-    def retrieve_lesson(self, request, pk=None):
+    def retrieve_lesson(self, request, id=None):
+        """
+        Получаем детальную информацию об одной паре.
+        :param id: первичный ключ пары.
+        """
         queryset = Lesson.objects.all()
-        lesson = get_object_or_404(queryset, pk=pk)
+        lesson = get_object_or_404(queryset, pk=id)
         serializer = LessonSerializer(lesson)
 
         return Response(serializer.data)
 
-    def retrieve_group(self, request, pk=None):
-        queryset = Lesson.objects.filter(group__id=pk)
-        # lesson = get_object_or_404(queryset, pk=pk)
-        serializer = GroupLessonSerializer(queryset, many=True)
+    def retrieve_group(self, request, id=None):
+        """
+        Получаем расписание на неделю для группы.
+        :param id: первичный ключ группы.
+        :return: трансформированный для отображения JSON.
+        """
+        queryset = Lesson.objects.filter(group__id=id)
+        serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response(self.transform_result(serializer.data))
+        return Response({'grid': self.transform_result(serializer.data)})
 
 
 class GroupViewSet(viewsets.ViewSet):
+    """
+    Вьюсет для списка и детализации групп.
+    """
     def list(self, request):
+        """
+        Метод для получения списка групп.
+        :return: JSON-список всех групп.
+        """
         queryset = Groups.objects.all()
         serializer = GroupSerializer(queryset, many=True)
 
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
+        """
+        Детализация информации по конкреной группе.
+        :param pk: первичный ключ группы.
+        :return: JSON-объект с информацией о группе.
+        """
         queryset = Groups.objects.all()
         group = get_object_or_404(queryset, pk=pk)
         serializer = GroupSerializer(group)
@@ -69,23 +109,29 @@ class GroupViewSet(viewsets.ViewSet):
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
+    """
+    Вьюсет для списка и детализации преподавателей.
+    Методы для этих действий реализуются автоматически.
+    """
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
 
 
 class ClassroomViewSet(viewsets.ModelViewSet):
+    """
+    Вьюсет для списка и детализации аудиторий.
+    Методы для этих действий реализуются автоматически.
+    """
     queryset = Classroom.objects.all()
     serializer_class = ClassroomSerializer
 
-
-from collections import namedtuple
 
 Search = namedtuple('Search', ('groups', 'teachers', 'classrooms'))
 
 
 class SearchViewSet(viewsets.ViewSet):
     """
-    Search for groups, teachers and classrooms.
+    Вьюсет для поиска групп, преподавателей и аудиторий без детализации.
     """
 
     def list(self, request):
@@ -99,6 +145,9 @@ class SearchViewSet(viewsets.ViewSet):
 
 
 class JSONGroupsView(APIView):
+    """
+    Вью для загрузки списка групп.
+    """
     def get(self, request):
         import urllib.request
         import json

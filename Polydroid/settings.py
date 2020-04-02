@@ -56,7 +56,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': [
             # 'rest_framework.permissions.IsAdminUser',
-        ]
+        ],
+    # 'DATETIME_FORMAT': '%s',
 }
 
 ROOT_URLCONF = 'Polydroid.urls'

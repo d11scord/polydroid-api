@@ -20,21 +20,11 @@ from django.urls import path, include
 
 from schedule.views import *
 
-router = routers.DefaultRouter()
-# router.register(r'groups', GroupViewSet, basename='groups')
-# router.register(r'lessons', LessonViewSet, basename='lessons')
-# router.register(r'teachers', TeacherViewSet)
-# router.register(r'classrooms', ClassroomViewSet)
-# router.register(r'search-objects', SearchViewSet, basename='search')
-#
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('', include(router.urls)),
-#     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-# ]
 
-# Списки пар, преподавателей, аудиторий и групп
-lessons_list = LessonViewSet.as_view({
+router = routers.DefaultRouter()
+
+# Списки пар, преподавателей, аудиторий и групп.
+lessons_list = ScheduleGroup.as_view({
     'get': 'list',
 })
 groups_list = GroupViewSet.as_view({
@@ -47,13 +37,13 @@ classrooms_list = ClassroomViewSet.as_view({
     'get': 'list',
 })
 
-# Детализированная информация о пара, преподавателях, аудиториях и группах
-lesson_detail = LessonViewSet.as_view({
+# Детализированная информация о парах, преподавателях, аудиториях и группах.
+lesson_detail = ScheduleGroup.as_view({
     'get': 'retrieve_lesson',
 })
 
-# Распиания
-lesson_group = LessonViewSet.as_view({
+# Расписания одной группы/преподавателя\аудитории.
+lesson_group = ScheduleGroup.as_view({
     'get': 'retrieve_group',
 })
 
@@ -66,10 +56,10 @@ urlpatterns = [
     path('classrooms/', classrooms_list, name='classrooms'),
 
     # Детализированная информация
-    path('lessons/<int:pk>/', lesson_detail, name='lesson-detail'),
+    path('lessons/<int:id>/', lesson_detail, name='lesson-detail'),
 
     # Расписания
-    path('schedule/group/<int:pk>/', lesson_group, name='lesson-group'),
+    path('schedule/group/<int:id>/', lesson_group, name='lesson-group'),
 
     # Поиск
     url(r'^search-objects/$', SearchViewSet.as_view({'get': 'list'})),
