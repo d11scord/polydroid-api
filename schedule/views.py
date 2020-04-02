@@ -78,7 +78,18 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'grid': self.transform_result(serializer.data)})
+        return Response(self.transform_result(serializer.data))
+
+    def retrieve_teacher(self, request, id=None):
+        """
+        Получаем расписание на неделю для группы.
+        :param id: первичный ключ группы.
+        :return: трансформированный для отображения JSON.
+        """
+        queryset = Lesson.objects.filter(teachers__id=id)
+        serializer = LessonSerializer(queryset, many=True)
+
+        return Response(serializer.data)
 
 
 class GroupViewSet(viewsets.ViewSet):
