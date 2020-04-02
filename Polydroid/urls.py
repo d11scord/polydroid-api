@@ -51,6 +51,9 @@ lesson_teacher = ScheduleGroup.as_view({
     'get': 'retrieve_teacher',
 })
 
+lesson_classroom = ScheduleGroup.as_view({
+    'get': 'retrieve_classroom',
+})
 
 urlpatterns = [
     # Списки
@@ -65,6 +68,7 @@ urlpatterns = [
     # Расписания
     path('schedule/group/<int:id>/', lesson_group, name='lesson-group'),
     path('schedule/teacher/<int:id>/', lesson_teacher, name='lesson-teacher'),
+    path('schedule/classroom/<int:id>/', lesson_classroom, name='lesson-classroom'),
 
     # Поиск
     url(r'^search-objects/$', SearchViewSet.as_view({'get': 'list'})),

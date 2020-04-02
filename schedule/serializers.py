@@ -47,6 +47,7 @@ class LessonSerializer(serializers.ModelSerializer):
     date_to = TimestampField()
     # Django Model.get_FOO_display
     week = serializers.CharField(source='get_week_display')
+    day_of_week = serializers.CharField(source='get_day_of_week_display')
     # Получаем по внешнему ключу название типа пары с помощью метода
     type = serializers.SerializerMethodField(source='get_type')
     group = GroupSerializer(many=False, read_only=True)
@@ -55,7 +56,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'week')
+        fields = ('id', 'name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'day_of_week', 'week')
 
     def get_type(self, obj):
         return obj.type.name

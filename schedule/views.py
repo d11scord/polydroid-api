@@ -82,14 +82,25 @@ class ScheduleGroup(viewsets.ViewSet):
 
     def retrieve_teacher(self, request, id=None):
         """
-        Получаем расписание на неделю для группы.
-        :param id: первичный ключ группы.
+        Получаем расписание на неделю для преподавателя.
+        :param id: первичный ключ преподавателя.
         :return: трансформированный для отображения JSON.
         """
         queryset = Lesson.objects.filter(teachers__id=id)
-        serializer = LessonSerializer(queryset, many=True)
+        serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response(serializer.data)
+        return Response(self.transform_result(serializer.data))
+
+    def retrieve_classroom(self, request, id=None):
+        """
+        Получаем расписание на неделю для аудитории.
+        :param id: первичный ключ аудитории.
+        :return: трансформированный для отображения JSON.
+        """
+        queryset = Lesson.objects.filter(classrooms__id=id)
+        serializer = ScheduleGroupSerializer(queryset, many=True)
+
+        return Response(self.transform_result(serializer.data))
 
 
 class GroupViewSet(viewsets.ViewSet):
