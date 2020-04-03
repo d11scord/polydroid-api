@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polydroid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schedule/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -187,7 +185,8 @@
       <workItem from="1585305410052" duration="20455000" />
       <workItem from="1585506657487" duration="111000" />
       <workItem from="1585508283392" duration="416000" />
-      <workItem from="1585840767813" duration="10903000" />
+      <workItem from="1585840767813" duration="11427000" />
+      <workItem from="1585911814893" duration="1023000" />
     </task>
     <servers />
   </component>

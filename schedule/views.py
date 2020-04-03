@@ -22,31 +22,18 @@ class ScheduleGroup(viewsets.ViewSet):
         """
         # Делаем заготовку по дням недели и количеству пар,
         # чтобы повторить структуру оригинальный JSON.
-        result = {
-            'monday'   : dict({i: list() for i in range(1, 8)}),
-            'tuesday'  : dict({i: list() for i in range(1, 8)}),
-            'wednesday': dict({i: list() for i in range(1, 8)}),
-            'thursday' : dict({i: list() for i in range(1, 8)}),
-            'friday'   : dict({i: list() for i in range(1, 8)}),
-            'saturday' : dict({i: list() for i in range(1, 8)}),
-            'sunday'   : dict({i: list() for i in range(1, 8)}),
-        }
-        for i in data:
-            # logger.error(i.number)
-            if i.day_of_week == 1:
-                result['monday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 2:
-                result['tuesday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 3:
-                result['wednesday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 4:
-                result['thursday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 5:
-                result['friday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 6:
-                result['saturday'][i.number].append(LessonSerializer(i).data)
-            if i.day_of_week == 7:
-                result['sunday'][i.number].append(LessonSerializer(i).data)
+        result = [
+            [list() for i in range(7)],  # 'monday'
+            [list() for i in range(7)],  # 'tuesday'
+            [list() for i in range(7)],  # 'wednesday'
+            [list() for i in range(7)],  # 'thursday'
+            [list() for i in range(7)],  # 'friday'
+            [list() for i in range(7)],  # 'saturday'
+            [list() for i in range(7)],  # 'sunday'
+        ]
+        for lesson in data:
+            logger.error(result[0])
+            result[lesson.day_of_week-1][lesson.number-1].append(LessonSerializer(lesson).data)
         return result
 
     def list(self, request):
