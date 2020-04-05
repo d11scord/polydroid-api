@@ -1,7 +1,6 @@
 import datetime
 
 from rest_framework import serializers
-
 from .models import *
 
 
@@ -32,7 +31,7 @@ class SearchSerializer(serializers.Serializer):
 class TimestampField(serializers.Field):
     def to_representation(self, value):
         epoch = datetime.date(1970, 1, 1)
-        return int((value - epoch).total_seconds())
+        return int((value - epoch).total_seconds())*1000
 
 
 class LessonTypeSerializer(serializers.ModelSerializer):

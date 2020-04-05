@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Polydroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Polydroid.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polydroid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/parser.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,10 +37,16 @@
   </component>
   <component name="ProjectId" id="1YqnmnBGKg5sb0Ao6C1XcDYk60z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -49,19 +59,7 @@
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\schedule" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.parser (1)">
+  <component name="RunManager" selected="Django server.Polydroid">
     <configuration name="parser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Polydroid" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -134,8 +132,9 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="Polydroid.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Maxim\PycharmProjects\polydroid-api\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -151,6 +150,12 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Django server.Polydroid" />
+      <item itemvalue="Python.parser" />
+      <item itemvalue="Python.parser (1)" />
+      <item itemvalue="Python.urls" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.parser (1)" />
@@ -187,6 +192,7 @@
       <workItem from="1585508283392" duration="416000" />
       <workItem from="1585840767813" duration="11427000" />
       <workItem from="1585911814893" duration="1023000" />
+      <workItem from="1586076774604" duration="11542000" />
     </task>
     <servers />
   </component>
@@ -206,9 +212,66 @@
       </map>
     </option>
   </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586076828104">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586076828104" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1586077888578">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1586077888578" />
+    <state width="1493" height="267" key="GridCell.Tab.0.bottom" timestamp="1586091922171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="267" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
+    <state width="1493" height="267" key="GridCell.Tab.0.center" timestamp="1586091922171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="267" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
+    <state width="1493" height="267" key="GridCell.Tab.0.left" timestamp="1586091922171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="267" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
+    <state width="1493" height="267" key="GridCell.Tab.0.right" timestamp="1586091922171">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="267" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586085209554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1586085209554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1586085209554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1586085209554">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
+    <state x="277" y="54" key="SettingsEditor" timestamp="1586077678089">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586077678089" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Polydroid$parser.coverage" NAME="parser Coverage Results" MODIFIED="1584017157817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/quickstart" />
     <SUITE FILE_PATH="coverage/Polydroid$urls.coverage" NAME="urls Coverage Results" MODIFIED="1584279318156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Polydroid" />
+    <SUITE FILE_PATH="coverage/Polydroid$parser.coverage" NAME="parser Coverage Results" MODIFIED="1584017157817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/quickstart" />
     <SUITE FILE_PATH="coverage/Polydroid$parser__1_.coverage" NAME="parser (1) Coverage Results" MODIFIED="1585305914501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/schedule_parser" />
   </component>
 </project>

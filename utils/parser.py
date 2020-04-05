@@ -43,8 +43,6 @@ with codecs.open('utils/schedule.json', 'r', 'utf_8_sig') as json_file:
                         number=number,
                         group=group,
                         type=lesson_type,
-                        # date_from=time.strptime(lesson['df'], "%Y-%m-%d"),
-                        # date_to=time.strptime(lesson['dt'], "%Y-%m-%d"),
                         date_from=lesson['df'],
                         date_to=lesson['dt'],
                         week=1 if lesson['week'] == 'even' else 2 if lesson['week'] == 'odd' else 3,

@@ -1,13 +1,12 @@
 from collections import namedtuple
-
-import logging
-
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import *
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +64,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response(self.transform_result(serializer.data))
+        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
 
     def retrieve_teacher(self, request, id=None):
         """
@@ -76,7 +75,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(teachers__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response(self.transform_result(serializer.data))
+        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
 
     def retrieve_classroom(self, request, id=None):
         """
@@ -87,7 +86,36 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(classrooms__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response(self.transform_result(serializer.data))
+        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
+
+    def retrieve_search(self, request):
+        """
+        Получаем расписание на неделю по поисковому параметру.
+        :return: трансформированный для отображения JSON.
+        """
+        search_parameter = request.GET.get('q')
+        if search_parameter is None or search_parameter == "":
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        groups = Groups.objects.filter(name__contains=search_parameter)
+        teachers = Teacher.objects.filter(name__contains=search_parameter)
+        classrooms = Classroom.objects.filter(name__contains=search_parameter)
+        suitable_count = groups.count() + teachers.count() + classrooms.count()
+        print("count: " + str(suitable_count))
+        if suitable_count == 1:
+            if groups.count() == 1:
+                queryset = Lesson.objects.filter(group__id=groups.first().id)
+            elif teachers.count() == 1:
+                queryset = Lesson.objects.filter(teachers__id=teachers.first().id)
+            elif classrooms.count() == 1:
+                queryset = Lesson.objects.filter(classrooms__id=classrooms.first().id)
+            else:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        elif suitable_count == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_300_MULTIPLE_CHOICES)
+        serializer = ScheduleGroupSerializer(queryset, many=True)
+        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
 
 
 class GroupViewSet(viewsets.ViewSet):
