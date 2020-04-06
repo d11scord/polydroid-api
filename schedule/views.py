@@ -103,11 +103,17 @@ class ScheduleGroup(viewsets.ViewSet):
         print("count: " + str(suitable_count))
         if suitable_count == 1:
             if groups.count() == 1:
-                queryset = Lesson.objects.filter(group__id=groups.first().id)
+                id = groups.first().id
+                type = 'group'
+                queryset = Lesson.objects.filter(group__id=id)
             elif teachers.count() == 1:
-                queryset = Lesson.objects.filter(teachers__id=teachers.first().id)
+                id = teachers.first().id
+                type = 'teacher'
+                queryset = Lesson.objects.filter(teachers__id=id)
             elif classrooms.count() == 1:
-                queryset = Lesson.objects.filter(classrooms__id=classrooms.first().id)
+                id = classrooms.first().id
+                type = 'classroom'
+                queryset = Lesson.objects.filter(classrooms__id=id)
             else:
                 return Response(status=status.HTTP_404_NOT_FOUND)
         elif suitable_count == 0:
@@ -115,7 +121,11 @@ class ScheduleGroup(viewsets.ViewSet):
         else:
             return Response(status=status.HTTP_300_MULTIPLE_CHOICES)
         serializer = ScheduleGroupSerializer(queryset, many=True)
-        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
+        return Response({
+            'id': id,
+            'type': type,
+            'grid': self.transform_result(serializer.data)
+        })
 
 
 class GroupViewSet(viewsets.ViewSet):
