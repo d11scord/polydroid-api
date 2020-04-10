@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from .serializers import *
 import logging
 
+from datetime import datetime
+
 logger = logging.getLogger(__name__)
 
 
@@ -31,7 +33,7 @@ class ScheduleGroup(viewsets.ViewSet):
             [list() for i in range(7)],  # 'sunday'
         ]
         for lesson in data:
-            logger.error(result[0])
+            # logger.error(result[0])
             result[lesson.day_of_week-1][lesson.number-1].append(LessonSerializer(lesson).data)
         return result
 
@@ -100,7 +102,7 @@ class ScheduleGroup(viewsets.ViewSet):
         teachers = Teacher.objects.filter(name__contains=search_parameter)
         classrooms = Classroom.objects.filter(name__contains=search_parameter)
         suitable_count = groups.count() + teachers.count() + classrooms.count()
-        print("count: " + str(suitable_count))
+        # print("count: " + str(suitable_count))
         if suitable_count == 1:
             if groups.count() == 1:
                 id = groups.first().id
@@ -121,8 +123,14 @@ class ScheduleGroup(viewsets.ViewSet):
         else:
             return Response(status=status.HTTP_300_MULTIPLE_CHOICES)
         serializer = ScheduleGroupSerializer(queryset, many=True)
+
+        # Текущая дата и время запроса в милисекундах
+        now = datetime.now()
+        timestamp = int(datetime.timestamp(now)) * 1000
+
         return Response({
             'id': id,
+            'date': timestamp,
             'type': type,
             'grid': self.transform_result(serializer.data)
         })

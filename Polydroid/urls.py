@@ -55,6 +55,7 @@ lesson_classroom = ScheduleGroup.as_view({
     'get': 'retrieve_classroom',
 })
 
+# Поиск по преподавателям/парам/аудиториям
 lesson_search = ScheduleGroup.as_view({
     'get': 'retrieve_search',
 })
