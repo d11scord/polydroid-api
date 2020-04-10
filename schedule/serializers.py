@@ -1,5 +1,4 @@
 import datetime
-
 from rest_framework import serializers
 from .models import *
 
@@ -22,16 +21,20 @@ class ClassroomSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'color')
 
 
-class SearchSerializer(serializers.Serializer):
-    groups = GroupSerializer(many=True)
-    teachers = TeacherSerializer(many=True)
-    classrooms = ClassroomSerializer(many=True)
-
-
 class TimestampField(serializers.Field):
     def to_representation(self, value):
         epoch = datetime.date(1970, 1, 1)
         return int((value - epoch).total_seconds())*1000
+
+
+class SearchSerializer(serializers.Serializer):
+    # Текущая дата и время запроса в милисекундах
+    # now = datetime.now()
+    # timestamp = int(datetime.timestamp(now)) * 1000
+    date = TimestampField()
+    groups = GroupSerializer(many=True)
+    teachers = TeacherSerializer(many=True)
+    classrooms = ClassroomSerializer(many=True)
 
 
 class LessonTypeSerializer(serializers.ModelSerializer):

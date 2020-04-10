@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 
 class ScheduleGroup(viewsets.ViewSet):
-    def transform_result(self, data):
+    @staticmethod
+    def transform_result(data):
         """
         Метод для трансформации данных расписания одной группы.
         Распределяет данные по дням недели, а в них по номеру пары.
@@ -33,9 +34,17 @@ class ScheduleGroup(viewsets.ViewSet):
             [list() for i in range(7)],  # 'sunday'
         ]
         for lesson in data:
-            # logger.error(result[0])
             result[lesson.day_of_week-1][lesson.number-1].append(LessonSerializer(lesson).data)
         return result
+
+    @staticmethod
+    def timestamp():
+        """
+        :return: Текущая дата и время запроса в милисекундах
+        """
+        now = datetime.now()
+        timestamp = int(datetime.timestamp(now)) * 1000
+        return timestamp
 
     def list(self, request):
         """
@@ -66,7 +75,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
+        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
 
     def retrieve_teacher(self, request, id=None):
         """
@@ -77,7 +86,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(teachers__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
+        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
 
     def retrieve_classroom(self, request, id=None):
         """
@@ -88,7 +97,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(classrooms__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': datetime.datetime.now(), 'grid': self.transform_result(serializer.data)})
+        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
 
     def retrieve_search(self, request):
         """
@@ -102,7 +111,6 @@ class ScheduleGroup(viewsets.ViewSet):
         teachers = Teacher.objects.filter(name__contains=search_parameter)
         classrooms = Classroom.objects.filter(name__contains=search_parameter)
         suitable_count = groups.count() + teachers.count() + classrooms.count()
-        # print("count: " + str(suitable_count))
         if suitable_count == 1:
             if groups.count() == 1:
                 id = groups.first().id
@@ -124,15 +132,11 @@ class ScheduleGroup(viewsets.ViewSet):
             return Response(status=status.HTTP_300_MULTIPLE_CHOICES)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        # Текущая дата и время запроса в милисекундах
-        now = datetime.now()
-        timestamp = int(datetime.timestamp(now)) * 1000
-
         return Response({
             'id': id,
-            'date': timestamp,
+            'date': self.timestamp(),
             'type': type,
-            'grid': self.transform_result(serializer.data)
+            'grid': self.transform_result(serializer.data),
         })
 
 
@@ -181,7 +185,7 @@ class ClassroomViewSet(viewsets.ModelViewSet):
     serializer_class = ClassroomSerializer
 
 
-Search = namedtuple('Search', ('groups', 'teachers', 'classrooms'))
+Search = namedtuple('Search', ('date', 'groups', 'teachers', 'classrooms'))
 
 
 class SearchViewSet(viewsets.ViewSet):
@@ -190,12 +194,17 @@ class SearchViewSet(viewsets.ViewSet):
     """
 
     def list(self, request):
+        # Текущая дата и время запроса в милисекундах
+        now = datetime.date(datetime.now())
+
         search = Search(
+            date=now,
             groups=Groups.objects.all(),
             teachers=Teacher.objects.all(),
             classrooms=Classroom.objects.all(),
         )
         serializer = SearchSerializer(search)
+
         return Response(serializer.data)
 
 
