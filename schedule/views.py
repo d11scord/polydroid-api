@@ -75,7 +75,12 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
+        return Response({
+            'id': id,
+            'date': self.timestamp(),
+            'type': 'classroom',
+            'grid': self.transform_result(serializer.data),
+        })
 
     def retrieve_teacher(self, request, id=None):
         """
@@ -86,7 +91,12 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(teachers__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
+        return Response({
+            'id': id,
+            'date': self.timestamp(),
+            'type': 'classroom',
+            'grid': self.transform_result(serializer.data),
+        })
 
     def retrieve_classroom(self, request, id=None):
         """
@@ -97,7 +107,12 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(classrooms__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        return Response({'time': self.timestamp(), 'grid': self.transform_result(serializer.data)})
+        return Response({
+            'id': id,
+            'date': self.timestamp(),
+            'type': 'classroom',
+            'grid': self.transform_result(serializer.data),
+        })
 
     def retrieve_search(self, request):
         """
