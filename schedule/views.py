@@ -78,7 +78,7 @@ class ScheduleGroup(viewsets.ViewSet):
         return Response({
             'id': id,
             'date': self.timestamp(),
-            'type': 'classroom',
+            'type': 'group',
             'grid': self.transform_result(serializer.data),
         })
 
@@ -94,7 +94,7 @@ class ScheduleGroup(viewsets.ViewSet):
         return Response({
             'id': id,
             'date': self.timestamp(),
-            'type': 'classroom',
+            'type': 'teacher',
             'grid': self.transform_result(serializer.data),
         })
 
