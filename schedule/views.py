@@ -13,6 +13,16 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 
+def get_teacher_name(teacher_id):
+    teacher_name = Teacher.objects.get(pk=teacher_id).name
+    teacher_name_array = Teacher.objects.get(pk=teacher_id).name.split()
+    if len(teacher_name_array) == 3:
+        title = teacher_name_array[0] + ' ' + teacher_name_array[1][0] + '. ' + teacher_name_array[2][0] + '.'
+    else:
+        title = teacher_name
+    return title
+
+
 class ScheduleGroup(viewsets.ViewSet):
     @staticmethod
     def transform_result(data):
@@ -75,10 +85,13 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
+        title = Groups.objects.get(pk=id).name
+
         return Response({
             'id': id,
             'date': self.timestamp(),
             'type': 'group',
+            'title': title,
             'grid': self.transform_result(serializer.data),
         })
 
@@ -95,8 +108,11 @@ class ScheduleGroup(viewsets.ViewSet):
             'id': id,
             'date': self.timestamp(),
             'type': 'teacher',
+            'title': get_teacher_name(id),
             'grid': self.transform_result(serializer.data),
         })
+
+
 
     def retrieve_classroom(self, request, id=None):
         """
@@ -107,10 +123,13 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(classrooms__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
+        title = Classroom.objects.get(pk=id).name
+
         return Response({
             'id': id,
             'date': self.timestamp(),
             'type': 'classroom',
+            'title': title,
             'grid': self.transform_result(serializer.data),
         })
 
@@ -130,14 +149,17 @@ class ScheduleGroup(viewsets.ViewSet):
             if groups.count() == 1:
                 id = groups.first().id
                 type = 'group'
+                title = Groups.objects.get(pk=id).name
                 queryset = Lesson.objects.filter(group__id=id)
             elif teachers.count() == 1:
                 id = teachers.first().id
                 type = 'teacher'
+                title = get_teacher_name(id).name
                 queryset = Lesson.objects.filter(teachers__id=id)
             elif classrooms.count() == 1:
                 id = classrooms.first().id
                 type = 'classroom'
+                title = Classroom.objects.get(pk=id).name
                 queryset = Lesson.objects.filter(classrooms__id=id)
             else:
                 return Response(status=status.HTTP_404_NOT_FOUND)
@@ -151,6 +173,7 @@ class ScheduleGroup(viewsets.ViewSet):
             'id': id,
             'date': self.timestamp(),
             'type': type,
+            'title': title,
             'grid': self.transform_result(serializer.data),
         })
 

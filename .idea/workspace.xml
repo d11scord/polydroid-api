@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Polydroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Polydroid.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
     </list>
@@ -182,7 +184,8 @@
       <workItem from="1586076774604" duration="11542000" />
       <workItem from="1586517063487" duration="1058000" />
       <workItem from="1586532559454" duration="2228000" />
-      <workItem from="1588603625595" duration="588000" />
+      <workItem from="1588603625595" duration="800000" />
+      <workItem from="1588765253438" duration="2613000" />
     </task>
     <servers />
   </component>
@@ -210,22 +213,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1586077888578" />
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom" timestamp="1586091922171">
+    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1588768908163">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
-    <state width="1493" height="267" key="GridCell.Tab.0.center" timestamp="1586091922171">
+    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588768908163" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1588765388472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
-    <state width="1493" height="267" key="GridCell.Tab.0.left" timestamp="1586091922171">
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588765388472" />
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1588769539595">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
-    <state width="1493" height="267" key="GridCell.Tab.0.right" timestamp="1586091922171">
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
+    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1588769539595">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586091922171" />
+    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
+    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1588769539595">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
+    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1588769539595">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586085209554">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
