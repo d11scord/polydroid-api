@@ -1,5 +1,7 @@
 from django.db import models
 
+from schedule.modelmixin import ModelDiffMixin
+
 
 class Groups(models.Model):
     name = models.CharField(max_length=20, unique=True)
@@ -23,7 +25,7 @@ class Teacher(models.Model):
         return self.name
 
 
-class Classroom(models.Model):
+class Classroom(models.Model, ModelDiffMixin):
     name = models.CharField(max_length=150, unique=True)
     color = models.CharField(max_length=8)
 
@@ -38,7 +40,7 @@ class LessonType(models.Model):
         return str('{}: {}'.format(self.id, self.name))
 
 
-class Lesson(models.Model):
+class Lesson(models.Model, ModelDiffMixin):
     LESSON_WEEK = (
         (1, 'even'),
         (2, 'odd'),
