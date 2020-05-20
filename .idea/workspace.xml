@@ -3,9 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/Polydroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Polydroid.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polydroid/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_backup.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/groups-list.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/parser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/schedule.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/semester.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,26 +37,32 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1YqnmnBGKg5sb0Ao6C1XcDYk60z" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\utils" />
-      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid" />
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\utils" />
       <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\schedule" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maxim\PycharmProjects\polydroid-api\schedule_parser" />
+      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid\utils" />
+      <recent name="D:\Machine Learning and Data Science\PyCharm Projects\Python trainings\Polydroid" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -200,6 +216,14 @@
       <workItem from="1588603625595" duration="800000" />
       <workItem from="1588765253438" duration="2613000" />
       <workItem from="1589382542146" duration="2244000" />
+      <workItem from="1589549783493" duration="15194000" />
+      <workItem from="1589565962254" duration="1249000" />
+      <workItem from="1589567233715" duration="5247000" />
+      <workItem from="1589737635314" duration="4153000" />
+      <workItem from="1589808105251" duration="11523000" />
+      <workItem from="1589881158055" duration="2597000" />
+      <workItem from="1589966134740" duration="32532000" />
+      <workItem from="1590006255483" duration="294000" />
     </task>
     <servers />
   </component>
@@ -219,11 +243,14 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586076828104">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589560081173">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586076828104" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1589560081173" />
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1586077888578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -232,46 +259,58 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588768908163" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1588765388472">
+    <state width="1116" height="495" key="DebuggerActiveHint" timestamp="1590003978234">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588765388472" />
-    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1588769539595">
+    <state width="1116" height="495" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1590003978234" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1589560075525">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
-    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1588769539595">
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1589560075525" />
+    <state width="1493" height="131" key="GridCell.Tab.0.bottom" timestamp="1590005930488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
-    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1588769539595">
+    <state width="1493" height="131" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590005930488" />
+    <state width="1493" height="131" key="GridCell.Tab.0.center" timestamp="1590005930488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
-    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1588769539595">
+    <state width="1493" height="131" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590005930488" />
+    <state width="1493" height="131" key="GridCell.Tab.0.left" timestamp="1590005930487">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588769539595" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586085209554">
+    <state width="1493" height="131" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590005930487" />
+    <state width="1493" height="131" key="GridCell.Tab.0.right" timestamp="1590005930488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1586085209554">
+    <state width="1493" height="131" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590005930488" />
+    <state width="1493" height="229" key="GridCell.Tab.1.bottom" timestamp="1590005929160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1586085209554">
+    <state width="1493" height="229" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590005929160" />
+    <state width="1493" height="229" key="GridCell.Tab.1.center" timestamp="1590005929160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1586085209554">
+    <state width="1493" height="229" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1590005929160" />
+    <state width="1493" height="229" key="GridCell.Tab.1.left" timestamp="1590005929160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586085209554" />
-    <state x="277" y="54" key="SettingsEditor" timestamp="1586077678089">
+    <state width="1493" height="229" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1590005929160" />
+    <state width="1493" height="229" key="GridCell.Tab.1.right" timestamp="1590005929160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586077678089" />
+    <state width="1493" height="229" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1590005929160" />
+    <state x="277" y="54" key="SettingsEditor" timestamp="1589816054139">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1589816054139" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1589976914229">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1589976914229" />
+    <state x="247" y="117" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1589816058954">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="247" y="117" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.0.1536.824@0.0.1536.824" timestamp="1589816058954" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
