@@ -141,3 +141,7 @@ def clear_database():
     cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_teacher'")
     cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lessontype'")
     cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_groups'")
+
+
+if __name__ == "__main__":
+    parse()
