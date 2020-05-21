@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polydroid/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -270,7 +268,7 @@
       <workItem from="1589966134740" duration="32532000" />
       <workItem from="1590006255483" duration="927000" />
       <workItem from="1590055146203" duration="3445000" />
-      <workItem from="1590059515612" duration="11795000" />
+      <workItem from="1590059515612" duration="12827000" />
     </task>
     <servers />
   </component>
