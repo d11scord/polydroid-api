@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'request.middleware.RequestMiddleware'
+    # 'request.middleware.RequestMiddleware'
 ]
 
 REST_FRAMEWORK = {
