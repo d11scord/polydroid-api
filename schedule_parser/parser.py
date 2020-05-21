@@ -124,15 +124,6 @@ def clear_database():
     Groups.objects.all().delete()
     LessonType.objects.all().delete()
 
-    # cursor = connection.cursor()
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson_classrooms'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_classroom'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson_teachers'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_teacher'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lessontype'")
-    # cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_groups'")
-
 
 def list_equals(first, second):
     is_equals = True
