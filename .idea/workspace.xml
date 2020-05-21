@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Polydroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Polydroid.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polydroid/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_backup.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/schedule.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/schedule/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/groups-list.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/parser.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/schedule.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/semester.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,7 +210,8 @@
       <workItem from="1589808105251" duration="11523000" />
       <workItem from="1589881158055" duration="2597000" />
       <workItem from="1589966134740" duration="32532000" />
-      <workItem from="1590006255483" duration="294000" />
+      <workItem from="1590006255483" duration="927000" />
+      <workItem from="1590055146203" duration="1014000" />
     </task>
     <servers />
   </component>

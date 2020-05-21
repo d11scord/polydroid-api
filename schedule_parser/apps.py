@@ -9,6 +9,7 @@ class ScheduleParserConfig(AppConfig):
 
     def ready(self):
         if os.environ.get('RUN_MAIN', None) != 'true':
+            parser.parse()
             scheduler = BackgroundScheduler()
             scheduler.add_job(parser.parse, trigger='cron', hour='19', minute='00')
             scheduler.add_job(parser.parse, trigger='cron', hour='00', minute='00')
