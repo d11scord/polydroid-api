@@ -1,12 +1,3 @@
-import urllib.request
-import json
-import codecs
-import datetime
-from utils.list_utils import list_equals
-from django.db import connection
-from django.utils import timezone
-
-
 def parse():
     print('start downloading')
     download_file()
@@ -143,5 +134,33 @@ def clear_database():
     cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_groups'")
 
 
+def list_equals(first, second):
+    is_equals = True
+    if len(first) != len(second):
+        return False
+    else:
+        for element_first, element_second in zip(first, second):
+            if not element_first.equals(element_second):
+                is_equals = False
+    return is_equals
+
+
+def list_to_json(objects):
+    json = '['
+    for obj in objects:
+        json = json+obj.to_json()
+    json = json+']'
+    return json
+
+
 if __name__ == "__main__":
+    import django
+    import urllib.request
+    import json
+    import codecs
+    import datetime
+    from django.db import connection
+    from django.utils import timezone
+
+    django.setup()
     parse()
