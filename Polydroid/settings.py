@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # 'request',
 
     'schedule',
-    # 'schedule_parser',
+    'schedule_parser',
 ]
 
 MIDDLEWARE = [
