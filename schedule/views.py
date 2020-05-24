@@ -44,7 +44,7 @@ class ScheduleGroup(viewsets.ViewSet):
             [list() for i in range(7)],  # 'sunday'
         ]
         for lesson in data:
-            result[lesson.day_of_week-1][lesson.number-1].append(LessonSerializer(lesson).data)
+            result[lesson.day_of_week - 1][lesson.number - 1].append(LessonSerializer(lesson).data)
         return result
 
     @staticmethod
@@ -111,8 +111,6 @@ class ScheduleGroup(viewsets.ViewSet):
             'title': get_teacher_name(id),
             'grid': self.transform_result(serializer.data),
         })
-
-
 
     def retrieve_classroom(self, request, id=None):
         """
@@ -182,6 +180,7 @@ class GroupViewSet(viewsets.ViewSet):
     """
     Вьюсет для списка и детализации групп.
     """
+
     def list(self, request):
         """
         Метод для получения списка групп.
@@ -194,7 +193,7 @@ class GroupViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         """
-        Детализация информации по конкреной группе.
+        Детализация информации по конкретной группе.
         :param pk: первичный ключ группы.
         :return: JSON-объект с информацией о группе.
         """
@@ -250,6 +249,7 @@ class JSONGroupsView(APIView):
     """
     Вью для загрузки списка групп.
     """
+
     def get(self, request):
         import urllib.request
         import json

@@ -72,7 +72,7 @@ class LessonType(models.Model):
         return '{name: ' + self.name + '}'
 
 
-class Lesson(models.Model, ModelDiffMixin):
+class Lesson(models.Model):
     LESSON_WEEK = (
         (1, 'even'),
         (2, 'odd'),
