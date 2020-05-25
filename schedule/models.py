@@ -120,7 +120,7 @@ class Lesson(models.Model):
 
 
 class Notification(models.Model):
-    time = models.DateTimeField()
+    time = models.BigIntegerField()
     old_lesson = models.TextField()
     new_lesson = models.TextField()
     targets = models.TextField()

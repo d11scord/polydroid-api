@@ -1,6 +1,7 @@
 import datetime
 from rest_framework import serializers
 from .models import *
+from django.utils import timezone
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -79,3 +80,10 @@ class ScheduleGroupSerializer(serializers.ModelSerializer):
         :return: dict(instance)
         """
         return instance
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Notification
+        fields = ('id', 'time', 'old_lesson', 'new_lesson')

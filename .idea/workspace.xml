@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f4b716db-ab11-49ba-a4db-3aca4c277fe4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polydroid/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Polydroid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Polydroid/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0002_auto_20200327_2025.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0003_auto_20200327_2046.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/0004_notification_targets.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/migrations/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schedule/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schedule/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/schedule/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -99,7 +108,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.desktop">
+  <component name="RunManager" selected="Python.parser (1)">
     <configuration name="desktop" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Polydroid" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -221,8 +230,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.desktop" />
         <item itemvalue="Python.parser (1)" />
+        <item itemvalue="Python.desktop" />
         <item itemvalue="Python.urls" />
         <item itemvalue="Python.parser" />
       </list>
@@ -273,7 +282,8 @@
       <workItem from="1590055146203" duration="3445000" />
       <workItem from="1590059515612" duration="25571000" />
       <workItem from="1590140292141" duration="4812000" />
-      <workItem from="1590346380893" duration="242000" />
+      <workItem from="1590346380893" duration="567000" />
+      <workItem from="1590401777105" duration="7755000" />
     </task>
     <servers />
   </component>
@@ -378,5 +388,6 @@
     <SUITE FILE_PATH="coverage/Polydroid$urls.coverage" NAME="urls Coverage Results" MODIFIED="1584279318156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Polydroid" />
     <SUITE FILE_PATH="coverage/polydroid_api$desktop.coverage" NAME="desktop Coverage Results" MODIFIED="1590059744766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/desktop" />
     <SUITE FILE_PATH="coverage/Polydroid$parser__1_.coverage" NAME="parser (1) Coverage Results" MODIFIED="1585305914501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/schedule_parser" />
+    <SUITE FILE_PATH="coverage/polydroid_api$parser__1_.coverage" NAME="parser (1) Coverage Results" MODIFIED="1590408936119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/schedule_parser" />
   </component>
 </project>

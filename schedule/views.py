@@ -258,3 +258,24 @@ class JSONGroupsView(APIView):
             response = json.loads(url.read().decode())
 
         return Response(response)
+
+
+class NotificationViewSet(viewsets.ViewSet):
+    """
+    Вьюсет для получения уведомлений об изменении в расписании.
+    Присылает последнее уведомление, большее last_index.
+    """
+
+    def list(self, request):
+        target = request.GET['target']
+        last_index = request.GET['last_index']
+
+        queryset = Notification.objects.filter(
+            id__gt=last_index,
+            targets__contains=target,
+        )
+        if len(queryset) == 0:
+            return Response([])
+
+        serializer = NotificationSerializer(queryset, many=True)
+        return Response(serializer.data)

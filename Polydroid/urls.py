@@ -76,6 +76,9 @@ urlpatterns = [
     path('schedule/classroom/<int:id>/', lesson_classroom, name='lesson-classroom'),
     url(r'schedule/search', lesson_search, name='lesson-search'),
 
+    # Уведомления
+    url('^notifications$', NotificationViewSet.as_view({'get': 'list'})),
+
     # Поиск
     url(r'^search-objects/$', SearchViewSet.as_view({'get': 'list'})),
 
