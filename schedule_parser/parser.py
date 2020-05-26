@@ -2,7 +2,7 @@ import urllib.request
 import json
 import codecs
 import datetime
-from utils.list_utils import list_equals, list_to_json
+from utils.list_utils import list_equals
 from django.db import connection
 from django.utils import timezone
 
@@ -104,7 +104,7 @@ def write_database(is_rewrite):
                         for old_lesson in old_lessons_array:
                             Notification(
                                 time=datetime.datetime.timestamp(timezone.datetime.now())+3*60*60*1000,
-                                old_lesson=list_to_json(old_lessons_array),
+                                old_lesson=old_lesson.to_json(),
                                 new_lesson="",
                                 targets=get_notification_targets(old_lesson)
                             ).save()
@@ -112,7 +112,7 @@ def write_database(is_rewrite):
                             Notification(
                                 time=datetime.datetime.timestamp(timezone.datetime.now())+3*60*60*1000,
                                 old_lesson="",
-                                new_lesson=list_to_json(new_lessons_array),
+                                new_lesson=new_lesson.to_json(),
                                 targets=get_notification_targets(new_lesson)
                             ).save()
 

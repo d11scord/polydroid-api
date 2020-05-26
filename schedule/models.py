@@ -129,3 +129,11 @@ class Notification(models.Model):
         return self.time == other.time \
                and self.old_lesson == other.old_lesson \
                and self.new_lesson == other.new_lesson
+
+    def __str__(self):
+        if self.old_lesson == '""':
+            return '{} - Добавление пары - {}'.format(self.id, self.targets)
+        if self.new_lesson == '""':
+            return '{} - Удаление пары - {}'.format(self.id, self.targets)
+        return '{} - Изменение пары - {}'.format(self.id, self.targets)
+
