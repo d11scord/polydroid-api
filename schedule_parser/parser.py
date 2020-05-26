@@ -1,3 +1,12 @@
+import urllib.request
+import json
+import codecs
+import datetime
+from utils.list_utils import list_equals, list_to_json
+from django.db import connection
+from django.utils import timezone
+
+
 def parse():
     print('start downloading')
     download_file()
@@ -94,16 +103,16 @@ def write_database(is_rewrite):
                                     old_lessons_array.remove(old_lesson)
                         for old_lesson in old_lessons_array:
                             Notification(
-                                time=timezone.now(),
-                                old_lesson=old_lesson.to_json(),
+                                time=datetime.datetime.timestamp(timezone.datetime.now())+3*60*60*1000,
+                                old_lesson=list_to_json(old_lessons_array),
                                 new_lesson="",
                                 targets=get_notification_targets(old_lesson)
                             ).save()
                         for new_lesson in new_lessons_array:
                             Notification(
-                                time=timezone.now(),
+                                time=datetime.datetime.timestamp(timezone.datetime.now())+3*60*60*1000,
                                 old_lesson="",
-                                new_lesson=new_lesson.to_json(),
+                                new_lesson=list_to_json(new_lessons_array),
                                 targets=get_notification_targets(new_lesson)
                             ).save()
 
@@ -124,34 +133,11 @@ def clear_database():
     Groups.objects.all().delete()
     LessonType.objects.all().delete()
 
-
-def list_equals(first, second):
-    is_equals = True
-    if len(first) != len(second):
-        return False
-    else:
-        for element_first, element_second in zip(first, second):
-            if not element_first.equals(element_second):
-                is_equals = False
-    return is_equals
-
-
-def list_to_json(objects):
-    json = '['
-    for obj in objects:
-        json = json+obj.to_json()
-    json = json+']'
-    return json
-
-
-if __name__ == "__main__":
-    import django
-    import urllib.request
-    import json
-    import codecs
-    import datetime
-    from django.db import connection
-    from django.utils import timezone
-
-    django.setup()
-    parse()
+    cursor = connection.cursor()
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson_classrooms'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_classroom'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lesson_teachers'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_teacher'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lessontype'")
+    cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_groups'")
