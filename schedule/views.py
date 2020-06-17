@@ -4,7 +4,6 @@ from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.views import APIView
 from .serializers import *
 import logging
 
@@ -52,8 +51,7 @@ class ScheduleGroup(viewsets.ViewSet):
         """
         :return: Текущая дата и время запроса в милисекундах
         """
-        now = datetime.now()
-        timestamp = int(datetime.timestamp(now)) * 1000
+        timestamp = int(datetime.timestamp()) * 1000
         return timestamp
 
     def list(self, request):
@@ -85,7 +83,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(group__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        title = Groups.objects.get(pk=id).name
+        title = Groups.objects.get(pk=id).name if Groups.objects.get(pk=id) is not None else ""
 
         return Response({
             'id': id,
@@ -121,7 +119,7 @@ class ScheduleGroup(viewsets.ViewSet):
         queryset = Lesson.objects.filter(classrooms__id=id)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
-        title = Classroom.objects.get(pk=id).name
+        title = Classroom.objects.get(pk=id).name if Classroom.objects.get(pk=id) is not None else ""
 
         return Response({
             'id': id,
@@ -230,6 +228,14 @@ class SearchViewSet(viewsets.ViewSet):
     Вьюсет для поиска групп, преподавателей и аудиторий без детализации.
     """
 
+    @staticmethod
+    def timestamp():
+        """
+        :return: Текущая дата и время запроса в милисекундах
+        """
+        timestamp = int(datetime.timestamp()) * 1000
+        return timestamp
+
     def list(self, request):
         # Текущая дата и время запроса в милисекундах
         now = datetime.date(datetime.now())
@@ -243,21 +249,6 @@ class SearchViewSet(viewsets.ViewSet):
         serializer = SearchSerializer(search)
 
         return Response(serializer.data)
-
-
-class JSONGroupsView(APIView):
-    """
-    Вью для загрузки списка групп.
-    """
-
-    def get(self, request):
-        import urllib.request
-        import json
-
-        with urllib.request.urlopen("https://rasp.dmami.ru/groups-list.json") as url:
-            response = json.loads(url.read().decode())
-
-        return Response(response)
 
 
 class NotificationViewSet(viewsets.ViewSet):

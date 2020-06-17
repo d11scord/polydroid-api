@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import re
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,12 +57,17 @@ MIDDLEWARE = [
     # 'request.middleware.RequestMiddleware'
 ]
 
+IGNORABLE_404_URLS = (
+    re.compile(r'\.(ico|html)$'),
+    re.compile(r'^/schedule/'),
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': [
-            # 'rest_framework.permissions.IsAdminUser',
-        ],
+        # 'rest_framework.permissions.IsAdminUser',
+    ],
     # 'DATETIME_FORMAT': '%s',
 }
 

@@ -97,6 +97,7 @@ class Lesson(models.Model):
     date_from = models.DateField()
     date_to = models.DateField()
     week = models.IntegerField(choices=LESSON_WEEK)
+    is_session = models.BooleanField()
 
     def __str__(self):
         return '{} {}'.format(self.name, self.group)
