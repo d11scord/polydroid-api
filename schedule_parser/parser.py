@@ -20,8 +20,8 @@ def parse():
 
     download_start_time = timezone.datetime.now()
     logging.info('Start downloading')
-    download_session_file()
     download_semester_file()
+    download_session_file()
     diff_start_time = timezone.datetime.now()
     logging.info('Downloaded in ' + str((diff_start_time - download_start_time).seconds) + ' seconds\nStart parsing in diff mode')
     write_database(False, False)
@@ -37,7 +37,7 @@ def parse():
 
 def download_semester_file():
     json_url = 'https://rasp.dmami.ru/semester.json'
-    file_url = 'schedule_parser/json/schedule.json'
+    file_url = 'schedule_parser/json/semester.json'
     urllib.request.urlretrieve(json_url, file_url)
 
 
@@ -45,11 +45,6 @@ def download_session_file():
     json_url = 'https://rasp.dmami.ru/session.json'
     file_url = 'schedule_parser/json/session.json'
     urllib.request.urlretrieve(json_url, file_url)
-
-
-def file_as_bytes(file):
-    with file:
-        return file.read()
 
 
 def write_database(is_rewrite, is_session):
@@ -60,22 +55,19 @@ def write_database(is_rewrite, is_session):
     """
     from schedule.models import Groups, Classroom, Teacher, Lesson, LessonType, Notification
     try:
-        with codecs.open('schedule_parser/json/schedule.json', 'r', 'utf_8_sig') as json_file:
+        file_path = 'schedule_parser/json/session.json' if is_session else 'schedule_parser/json/semester.json'
+        with codecs.open(file_path, 'r', 'utf_8_sig') as json_file:
             data = json.load(json_file)
             diffs_count = 0
             for content in data['contents']:
                 group, _ = Groups.objects.get_or_create(
                     name=content['group']['title'],
-                    course=content['group']['course'],
-                    date_from=datetime.datetime.strptime(content['group']['dateFrom'], "%Y-%m-%d").date(),
-                    date_to=datetime.datetime.strptime(content['group']['dateTo'], "%Y-%m-%d").date(),
-                    is_evening=content['group']['evening'] == 1, )
-
+                    course=content['group']['course'])
                 grid = content['grid']
-                for day in grid:
+                for day_counter, day in enumerate(grid):
                     for number in grid[day]:
                         old_lessons_array = list(Lesson.objects.filter(
-                            day_of_week=int(day),
+                            day_of_week=day_counter+1,
                             number=int(number),
                             group__name=group.name,
                             is_session=is_session)
@@ -104,13 +96,13 @@ def write_database(is_rewrite, is_session):
 
                             new_lesson = Lesson(
                                 name=lesson['sbj'],
-                                day_of_week=int(day),
+                                day_of_week=day_counter+1,
                                 number=int(number),
                                 group=group,
                                 type=new_lesson_type,
-                                date_from=datetime.datetime.strptime(lesson['df'], "%Y-%m-%d").date(),
-                                date_to=datetime.datetime.strptime(lesson['dt'], "%Y-%m-%d").date(),
-                                week=1 if lesson['week'] == 'even' else 2 if lesson['week'] == 'odd' else 3,
+                                date_from=datetime.datetime.strptime(day if is_session else lesson['df'], "%Y-%m-%d").date(),
+                                date_to=datetime.datetime.strptime(day if is_session else lesson['dt'], "%Y-%m-%d").date(),
+                                week=3 if is_session else 1 if lesson['week'] == 'even' else 2 if lesson['week'] == 'odd' else 3,
                                 is_session=is_session
                             )
                             new_lesson.save()
@@ -150,10 +142,8 @@ def write_database(is_rewrite, is_session):
         if not is_rewrite:
             logging.info('Diffs count: ' + str(diffs_count))
     except Exception as e:
-        if group is not None and day is not None and number is not None:
-            logging.exception('Exception in group: ' + group.name + ', day: ' + day + ', number: ' + number)
-            logging.exception(e)
-        raise
+        logging.exception('Exception in group: ' + group.name + ', day: ' + day + ', number: ' + number + ', is+session= ' + str(is_session))
+        raise e
 
 
 def get_notification_targets(lesson):
@@ -182,5 +172,19 @@ def clear_database():
         cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_lessontype'")
         cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_groups'")
     except Exception as e:
+        logging.exception("Exception occurred while clearing database")
         logging.exception(e)
         raise
+
+
+def clear_notifications():
+    from schedule.models import Notification
+
+    try:
+        Notification.objects.all().delete()
+        cursor = connection.cursor()
+        cursor.execute("UPDATE sqlite_sequence SET seq=0 WHERE name = 'schedule_notification'")
+    except Exception as e:
+        logging.exception("Exception occurred while clearing notifications table")
+        logging.exception(e)
+        raise e

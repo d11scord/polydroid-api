@@ -6,8 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
 import logging
-
-from datetime import datetime
+import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -46,14 +45,6 @@ class ScheduleGroup(viewsets.ViewSet):
             result[lesson.day_of_week - 1][lesson.number - 1].append(LessonSerializer(lesson).data)
         return result
 
-    @staticmethod
-    def timestamp():
-        """
-        :return: Текущая дата и время запроса в милисекундах
-        """
-        timestamp = int(datetime.timestamp()) * 1000
-        return timestamp
-
     def list(self, request):
         """
         Получаем список всех пар.
@@ -80,14 +71,15 @@ class ScheduleGroup(viewsets.ViewSet):
         :param id: первичный ключ группы.
         :return: трансформированный для отображения JSON.
         """
-        queryset = Lesson.objects.filter(group__id=id)
+        is_session = True if 'is_session' in request.GET and request.GET['is_session'] == 'true' else False
+        queryset = Lesson.objects.filter(group__id=id, is_session=is_session)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
         title = Groups.objects.get(pk=id).name if Groups.objects.get(pk=id) is not None else ""
 
         return Response({
             'id': id,
-            'date': self.timestamp(),
+            'date': datetime.datetime.now().timestamp(),
             'type': 'group',
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -99,12 +91,13 @@ class ScheduleGroup(viewsets.ViewSet):
         :param id: первичный ключ преподавателя.
         :return: трансформированный для отображения JSON.
         """
-        queryset = Lesson.objects.filter(teachers__id=id)
+        is_session = True if 'is_session' in request.GET and request.GET['is_session'] == 'true' else False
+        queryset = Lesson.objects.filter(teachers__id=id, is_session=is_session)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
         return Response({
             'id': id,
-            'date': self.timestamp(),
+            'date': datetime.datetime.now().timestamp(),
             'type': 'teacher',
             'title': get_teacher_name(id),
             'grid': self.transform_result(serializer.data),
@@ -116,14 +109,15 @@ class ScheduleGroup(viewsets.ViewSet):
         :param id: первичный ключ аудитории.
         :return: трансформированный для отображения JSON.
         """
-        queryset = Lesson.objects.filter(classrooms__id=id)
+        is_session = True if 'is_session' in request.GET and request.GET['is_session'] == 'true' else False
+        queryset = Lesson.objects.filter(classrooms__id=id, is_session=is_session)
         serializer = ScheduleGroupSerializer(queryset, many=True)
 
         title = Classroom.objects.get(pk=id).name if Classroom.objects.get(pk=id) is not None else ""
 
         return Response({
             'id': id,
-            'date': self.timestamp(),
+            'date': datetime.datetime.now().timestamp(),
             'type': 'classroom',
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -134,6 +128,7 @@ class ScheduleGroup(viewsets.ViewSet):
         Получаем расписание на неделю по поисковому параметру.
         :return: трансформированный для отображения JSON.
         """
+        is_session = True if 'is_session' in request.GET and request.GET['is_session'] == 'true' else False
         search_parameter = request.GET.get('q')
         if search_parameter is None or search_parameter == "":
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -146,17 +141,17 @@ class ScheduleGroup(viewsets.ViewSet):
                 id = groups.first().id
                 type = 'group'
                 title = Groups.objects.get(pk=id).name
-                queryset = Lesson.objects.filter(group__id=id)
+                queryset = Lesson.objects.filter(group__id=id, is_session=is_session)
             elif teachers.count() == 1:
                 id = teachers.first().id
                 type = 'teacher'
                 title = get_teacher_name(id).name
-                queryset = Lesson.objects.filter(teachers__id=id)
+                queryset = Lesson.objects.filter(teachers__id=id, is_session=is_session)
             elif classrooms.count() == 1:
                 id = classrooms.first().id
                 type = 'classroom'
                 title = Classroom.objects.get(pk=id).name
-                queryset = Lesson.objects.filter(classrooms__id=id)
+                queryset = Lesson.objects.filter(classrooms__id=id, is_session=is_session)
             else:
                 return Response(status=status.HTTP_404_NOT_FOUND)
         elif suitable_count == 0:
@@ -167,7 +162,7 @@ class ScheduleGroup(viewsets.ViewSet):
 
         return Response({
             'id': id,
-            'date': self.timestamp(),
+            'date': datetime.datetime.now().timestamp(),
             'type': type,
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -228,17 +223,9 @@ class SearchViewSet(viewsets.ViewSet):
     Вьюсет для поиска групп, преподавателей и аудиторий без детализации.
     """
 
-    @staticmethod
-    def timestamp():
-        """
-        :return: Текущая дата и время запроса в милисекундах
-        """
-        timestamp = int(datetime.timestamp()) * 1000
-        return timestamp
-
     def list(self, request):
         # Текущая дата и время запроса в милисекундах
-        now = datetime.date(datetime.now())
+        now = datetime.datetime.now().timestamp()
 
         search = Search(
             date=now,
