@@ -56,10 +56,11 @@ class LessonSerializer(serializers.ModelSerializer):
     group = GroupSerializer(many=False, read_only=True)
     teachers = TeacherSerializer(many=True, read_only=True)
     classrooms = ClassroomSerializer(many=True, read_only=True)
+    is_session = serializers.BooleanField()
 
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'day_of_week', 'week')
+        fields = ('id', 'name', 'teachers', 'group', 'classrooms', 'type', 'date_from', 'date_to', 'number', 'day_of_week', 'week', 'is_session')
 
     def get_type(self, obj):
         return obj.type.name
