@@ -128,7 +128,10 @@ class ScheduleGroup(viewsets.ViewSet):
         Получаем расписание на неделю по поисковому параметру.
         :return: трансформированный для отображения JSON.
         """
-        is_session = True if 'is_session' in request.GET and request.GET['is_session'] == 'true' else False
+        try:
+            is_session = request.GET['is_session'] == 'true'
+        except:
+            is_session = False
         search_parameter = request.GET.get('q')
         if search_parameter is None or search_parameter == "":
             return Response(status=status.HTTP_400_BAD_REQUEST)

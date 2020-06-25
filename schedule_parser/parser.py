@@ -17,22 +17,21 @@ logging.basicConfig(level=logging.INFO,
 
 def parse():
     logging.info('\n\n-------------------------------------------------------')
-
     download_start_time = timezone.datetime.now()
     logging.info('Start downloading')
     download_semester_file()
     download_session_file()
     diff_start_time = timezone.datetime.now()
     logging.info('Downloaded in ' + str((diff_start_time - download_start_time).seconds) + ' seconds\nStart parsing in diff mode')
-    write_database(False, False)
-    write_database(False, True)
+    parse_semester(False, False)
+    parse_semester(False, True)
     rewrite_start_time = timezone.datetime.now()
     logging.info('Parsing in diff mode success in ' + str((rewrite_start_time - diff_start_time).seconds / 60) + ' minutes\nStart parsing in rewrite mode')
     clear_database()
-    write_database(True, False)
-    write_database(True, True)
-    logging.info('Parsing in rewrite mode success in ' +
-                 str((timezone.datetime.now() - rewrite_start_time).seconds / 60) + ' minutes')
+    parse_semester(True, False)
+    parse_semester(True, True)
+    logging.info('Parsing in rewrite mode success in ' + str((timezone.datetime.now() - rewrite_start_time).seconds / 60) + ' minutes')
+    print('done')
 
 
 def download_semester_file():
@@ -47,11 +46,10 @@ def download_session_file():
     urllib.request.urlretrieve(json_url, file_url)
 
 
-def write_database(is_rewrite, is_session):
+def parse_semester(is_rewrite, is_session):
     """
     :param is_rewrite: Boolean. False if function should only detect changes,
      True if should rewrite old database
-    :param is_session: Boolean
     """
     from schedule.models import Groups, Classroom, Teacher, Lesson, LessonType, Notification
     try:
@@ -64,10 +62,11 @@ def write_database(is_rewrite, is_session):
                     name=content['group']['title'],
                     course=content['group']['course'])
                 grid = content['grid']
-                for day_counter, day in enumerate(grid):
+
+                for day in grid:
                     for number in grid[day]:
                         old_lessons_array = list(Lesson.objects.filter(
-                            day_of_week=day_counter+1,
+                            day_of_week=datetime.datetime.strptime(day, "%Y-%m-%d").weekday()+1 if is_session else day,
                             number=int(number),
                             group__name=group.name,
                             is_session=is_session)
@@ -96,7 +95,7 @@ def write_database(is_rewrite, is_session):
 
                             new_lesson = Lesson(
                                 name=lesson['sbj'],
-                                day_of_week=day_counter+1,
+                                day_of_week=datetime.datetime.strptime(day, "%Y-%m-%d").weekday()+1 if is_session else day,
                                 number=int(number),
                                 group=group,
                                 type=new_lesson_type,
@@ -142,7 +141,7 @@ def write_database(is_rewrite, is_session):
         if not is_rewrite:
             logging.info('Diffs count: ' + str(diffs_count))
     except Exception as e:
-        logging.exception('Exception in group: ' + group.name + ', day: ' + day + ', number: ' + number + ', is+session= ' + str(is_session))
+        logging.exception('Exception in group: ' + group.name + ', day: ' + day + ', number: ' + number)
         raise e
 
 
