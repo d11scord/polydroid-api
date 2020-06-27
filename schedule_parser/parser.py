@@ -50,6 +50,7 @@ def parse_semester(is_rewrite, is_session):
     """
     :param is_rewrite: Boolean. False if function should only detect changes,
      True if should rewrite old database
+    :param is_session: Boolean. True for use session schedule, False for semester
     """
     from schedule.models import Groups, Classroom, Teacher, Lesson, LessonType, Notification
     try:
@@ -124,7 +125,7 @@ def parse_semester(is_rewrite, is_session):
                                         old_lessons_array.remove(old_lesson)
                             for old_lesson in old_lessons_array:
                                 Notification(
-                                    time=datetime.datetime.timestamp(timezone.datetime.now()) + 3 * 60 * 60 * 1000,
+                                    time=int((datetime.datetime.now().timestamp()+60*60*3)*1000),
                                     old_lesson=old_lesson.to_json(),
                                     new_lesson="",
                                     targets=get_notification_targets(old_lesson)
@@ -132,7 +133,7 @@ def parse_semester(is_rewrite, is_session):
                                 diffs_count += 1
                             for new_lesson in new_lessons_array:
                                 Notification(
-                                    time=datetime.datetime.timestamp(timezone.datetime.now()) + 3 * 60 * 60 * 1000,
+                                    time=int((datetime.datetime.now().timestamp()+60*60*3)*1000),
                                     old_lesson="",
                                     new_lesson=new_lesson.to_json(),
                                     targets=get_notification_targets(new_lesson)

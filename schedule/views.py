@@ -11,6 +11,10 @@ import datetime
 logger = logging.getLogger(__name__)
 
 
+def get_current_timestamp():
+    return int((datetime.datetime.now().timestamp()+60*60*3)*1000)
+
+
 def get_teacher_name(teacher_id):
     teacher_name = Teacher.objects.get(pk=teacher_id).name
     teacher_name_array = Teacher.objects.get(pk=teacher_id).name.split()
@@ -79,7 +83,7 @@ class ScheduleGroup(viewsets.ViewSet):
 
         return Response({
             'id': id,
-            'date': datetime.datetime.now().timestamp(),
+            'date': get_current_timestamp(),
             'type': 'group',
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -97,7 +101,7 @@ class ScheduleGroup(viewsets.ViewSet):
 
         return Response({
             'id': id,
-            'date': datetime.datetime.now().timestamp(),
+            'date': get_current_timestamp(),
             'type': 'teacher',
             'title': get_teacher_name(id),
             'grid': self.transform_result(serializer.data),
@@ -117,7 +121,7 @@ class ScheduleGroup(viewsets.ViewSet):
 
         return Response({
             'id': id,
-            'date': datetime.datetime.now().timestamp(),
+            'date': get_current_timestamp(),
             'type': 'classroom',
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -165,7 +169,7 @@ class ScheduleGroup(viewsets.ViewSet):
 
         return Response({
             'id': id,
-            'date': datetime.datetime.now().timestamp(),
+            'date': get_current_timestamp(),
             'type': type,
             'title': title,
             'grid': self.transform_result(serializer.data),
@@ -227,11 +231,8 @@ class SearchViewSet(viewsets.ViewSet):
     """
 
     def list(self, request):
-        # Текущая дата и время запроса в милисекундах
-        now = datetime.datetime.now().timestamp()
-
         search = Search(
-            date=now,
+            date=get_current_timestamp(),
             groups=Groups.objects.all(),
             teachers=Teacher.objects.all(),
             classrooms=Classroom.objects.all(),

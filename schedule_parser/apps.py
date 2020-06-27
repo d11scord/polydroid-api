@@ -2,6 +2,7 @@ from django.apps import AppConfig
 import os
 from schedule_parser import parser
 from apscheduler.schedulers.background import BackgroundScheduler
+import datetime
 
 
 class ScheduleParserConfig(AppConfig):

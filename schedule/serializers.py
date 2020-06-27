@@ -1,7 +1,6 @@
 import datetime
 from rest_framework import serializers
 from .models import *
-from django.utils import timezone
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -24,8 +23,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
 class TimestampField(serializers.Field):
     def to_representation(self, value):
-        epoch = datetime.date(1970, 1, 1)
-        return int((value - epoch).total_seconds())*1000
+        return int((datetime.datetime.now().timestamp()+60*60*3)*1000)
 
 
 class SearchSerializer(serializers.Serializer):
