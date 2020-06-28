@@ -21,10 +21,12 @@ class ClassroomSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'color')
 
 
-class TimestampField(serializers.Field):
+class TimestampField(serializers.Field):    
     def to_representation(self, value):
-        epoch = datetime.date(1970, 1, 1)
-        return int((value - epoch).total_seconds())*1000
+        try:
+            return (int(datetime.datetime(value.year, value.month, value.day).timestamp())+3*60*60)*1000
+        except AttributeError:
+            return value
 
 
 class SearchSerializer(serializers.Serializer):
